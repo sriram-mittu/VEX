@@ -160,8 +160,12 @@ void followPath(vector<vector<double>> wp, double ld) {
   vector<vector<double>> smoothed = addValues(smoothPath(injectPoints(wp)));
   setCoast();
 
+  double lastLeft = 0;
+  double lastRight = 0;
+
   while (closestPoint(smoothed) != smoothed.size() - 1) {
     vector<double> lookAheadPoint = lookaheadPoint(smoothed, ld);
+
     double wheelLeft =
         smoothed[closestPoint(smoothed)][4] *
         (2 + lookaheadCurvature(lookAheadPoint, ld) * trackWidth) / 2;
@@ -169,11 +173,18 @@ void followPath(vector<vector<double>> wp, double ld) {
         smoothed[closestPoint(smoothed)][4] *
         (2 - lookaheadCurvature(lookAheadPoint, ld) * trackWidth) / 2;
 
-    double leftWheels = (kV * wheelLeft) + (kA * maxAccel) +
+    double tal = wheelLeft - lastLeft / 0.01;
+    double tar = wheelRight - lastRight / 0.01;
+
+    double leftWheels = (kV * wheelLeft) + (kA * tal) +
                         (kP * (wheelLeft - l1.get_actual_velocity()));
-    double rightWheels = (kV * wheelRight) + (kA * maxAccel) +
+    double rightWheels = (kV * wheelRight) + (kA * tar) +
                          (kP * (wheelRight - r1.get_actual_velocity()));
 
+    lastLeft = wheelLeft;
+    lastRight = wheelRight;
+
     setDrive(leftWheels, rightWheels);
+    wait(10);
   }
 }
