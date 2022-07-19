@@ -14,6 +14,7 @@ void opcontrol() {
     ly = (ly * ly * ly) / (127 * 127);
     ry = (ry * ry * ry) / (127 * 127);
     setDrive(ly, ry);
+    setDrive(ry, ly);
 
     if (master.get_digital(DIGITAL_R1))
       intake = 127;
