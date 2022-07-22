@@ -1,35 +1,27 @@
 #include "main.h"
 
-void initialize() { calibrateIMU(); }
-void autonomous() { skills(); }
+void initialize() { selectAuton(); }
+void autonomous() { runAuton(autonNum); }
 
 void opcontrol() {
-  setCoast();
-  while (true) {
-    double ly = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    double ry = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+    setCoast();
+    while (true) {
+        double leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        double rightY = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
 
-    // test
+        leftY = (leftY * leftY * leftY) / (127 * 127);
+        rightY = (rightY * rightY * rightY) / (127 * 127);
+        setDrive(leftY, rightY);
 
-    ly = (ly * ly * ly) / (127 * 127);
-    ry = (ry * ry * ry) / (127 * 127);
-    setDrive(ly, ry);
-    setDrive(ry, ly);
+        if (master.get_digital_new_press(DIGITAL_L1)) shoot();
+        if (master.get_digital_new_press(DIGITAL_L2)) turnToGoal();
+        
+        if (master.get_digital(DIGITAL_R1)) intake = 127;
+        if (master.get_digital(DIGITAL_R2)) intake = -127;
+        else intake = 0;
 
-    if (master.get_digital(DIGITAL_R1))
-      intake = 127;
-    if (master.get_digital(DIGITAL_R2))
-      intake = -127;
-    else
-      intake = 0;
+        flywheel = hypot(100 - posX, 100 - posY) * 2;
 
-    if (master.get_digital(DIGITAL_L1))
-      shoot();
-    if (master.get_digital(DIGITAL_L2))
-      turnToGoal();
-
-    flywheel = hypot(100 - posX, 100 - posY) * 2;
-
-    pros::delay(10);
-  }
+        pros::delay(10);
+    }
 }

@@ -75,10 +75,10 @@ bin/files/globals.cpp.o: src/files/globals.cpp include/main.h \
  include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
  include/pros/rtos.h include/pros/screen.hpp include/pros/screen.h \
  include/pros/vision.hpp include/pros/vision.h include/pros/link.hpp \
- include/pros/link.h include/header/globals.hpp \
+ include/pros/link.h include/header/globals.hpp include/pros/adi.hpp \
  include/header/purePursuit.hpp include/header/autons.hpp \
  include/header/odometry.hpp include/header/PID.hpp \
- include/pros/rotation.hpp include/pros/rtos.hpp
+ include/header/autonSelector.hpp include/pros/rtos.hpp
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -231,9 +231,10 @@ include/pros/vision.h:
 include/pros/link.hpp:
 include/pros/link.h:
 include/header/globals.hpp:
+include/pros/adi.hpp:
 include/header/purePursuit.hpp:
 include/header/autons.hpp:
 include/header/odometry.hpp:
 include/header/PID.hpp:
-include/pros/rotation.hpp:
+include/header/autonSelector.hpp:
 include/pros/rtos.hpp:

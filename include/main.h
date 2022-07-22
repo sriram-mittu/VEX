@@ -77,6 +77,7 @@ void opcontrol(void);
 #include "header/autons.hpp"
 #include "header/odometry.hpp"
 #include "header/PID.hpp"
+#include "header/autonSelector.hpp"
 //#include <iostream>
 #endif
 

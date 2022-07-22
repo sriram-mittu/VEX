@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "spin-up",
+    "project_name": "spin up",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -306,7 +306,7 @@
       }
     },
     "upload_options": {
-      "description": "robot go zoom",
+      "description": "testing",
       "after": "run",
       "icon": "pros"
     }
